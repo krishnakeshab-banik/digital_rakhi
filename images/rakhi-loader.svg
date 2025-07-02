@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- Main Rakhi Circle -->
+  <circle cx="100" cy="100" r="50" fill="#FFD700" stroke="#FF5E62" stroke-width="4"/>
+  
+  <!-- Decorative patterns -->
+  <circle cx="100" cy="100" r="40" fill="none" stroke="#FF9966" stroke-width="3" stroke-dasharray="5,3"/>
+  <circle cx="100" cy="100" r="30" fill="#FFC371" stroke="#FF5E62" stroke-width="2"/>
+  
+  <!-- Center design -->
+  <circle cx="100" cy="100" r="15" fill="#FF5E62"/>
+  <circle cx="100" cy="100" r="10" fill="#FFD700"/>
+  <circle cx="100" cy="100" r="5" fill="#FF9966"/>
+  
+  <!-- Decorative elements around -->
+  <g id="decorations">
+    <!-- Top decoration -->
+    <path d="M100,40 Q110,30 100,20 Q90,30 100,40" fill="#FF5E62" stroke="#FFD700" stroke-width="1"/>
+    <!-- Bottom decoration -->
+    <path d="M100,160 Q110,170 100,180 Q90,170 100,160" fill="#FF5E62" stroke="#FFD700" stroke-width="1"/>
+    <!-- Left decoration -->
+    <path d="M40,100 Q30,110 20,100 Q30,90 40,100" fill="#FF5E62" stroke="#FFD700" stroke-width="1"/>
+    <!-- Right decoration -->
+    <path d="M160,100 Q170,110 180,100 Q170,90 160,100" fill="#FF5E62" stroke="#FFD700" stroke-width="1"/>
+  </g>
+  
+  <!-- Rakhi string -->
+  <path d="M100,150 Q130,170 160,180 M100,150 Q70,170 40,180" fill="none" stroke="#FF5E62" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Small gems -->
+  <circle cx="85" cy="85" r="5" fill="#FF9966" stroke="#FFD700" stroke-width="1"/>
+  <circle cx="115" cy="85" r="5" fill="#FF9966" stroke="#FFD700" stroke-width="1"/>
+  <circle cx="85" cy="115" r="5" fill="#FF9966" stroke="#FFD700" stroke-width="1"/>
+  <circle cx="115" cy="115" r="5" fill="#FF9966" stroke="#FFD700" stroke-width="1"/>
+  
+  <!-- Outer glow effect -->
+  <circle cx="100" cy="100" r="60" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.5"/>
+  <circle cx="100" cy="100" r="65" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+  <circle cx="100" cy="100" r="70" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.1"/>
+</svg>
