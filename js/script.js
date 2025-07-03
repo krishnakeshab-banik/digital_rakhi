@@ -100,39 +100,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Memory Gallery Navigation
-    let currentMemoryIndex = 0;
-    const totalMemories = memoryItems.length;
-    
-    // Initially hide all memories except the first one
-    if (memoryItems.length > 0) {
-        updateMemoryDisplay();
-    }
-    
-    if (prevMemoryBtn) {
-        prevMemoryBtn.addEventListener('click', function() {
-            currentMemoryIndex = (currentMemoryIndex - 1 + totalMemories) % totalMemories;
-            updateMemoryDisplay();
-        });
-    }
-    
-    if (nextMemoryBtn) {
-        nextMemoryBtn.addEventListener('click', function() {
-            currentMemoryIndex = (currentMemoryIndex + 1) % totalMemories;
-            updateMemoryDisplay();
-        });
-    }
-    
-    function updateMemoryDisplay() {
-        memoryItems.forEach((item, index) => {
-            if (index === currentMemoryIndex) {
-                item.style.display = 'block';
-                item.classList.add('active');
-            } else {
-                item.style.display = 'none';
-                item.classList.remove('active');
-            }
-        });
-    }
+    // REMOVE the following lines to show all memories at once:
+    // let currentMemoryIndex = 0;
+    // const totalMemories = memoryItems.length;
+    // if (memoryItems.length > 0) {
+    //     updateMemoryDisplay();
+    // }
+    // if (prevMemoryBtn) {
+    //     prevMemoryBtn.addEventListener('click', function() {
+    //         currentMemoryIndex = (currentMemoryIndex - 1 + totalMemories) % totalMemories;
+    //         updateMemoryDisplay();
+    //     });
+    // }
+    // if (nextMemoryBtn) {
+    //     nextMemoryBtn.addEventListener('click', function() {
+    //         currentMemoryIndex = (currentMemoryIndex + 1) % totalMemories;
+    //         updateMemoryDisplay();
+    //     });
+    // }
+    // function updateMemoryDisplay() {
+    //     memoryItems.forEach((item, index) => {
+    //         if (index === currentMemoryIndex) {
+    //             item.style.display = 'block';
+    //             item.classList.add('active');
+    //         } else {
+    //             item.style.display = 'none';
+    //             item.classList.remove('active');
+    //         }
+    //     });
+    // }
+
+    // Optionally, you can disable the gallery controls since all images are visible:
+    if (prevMemoryBtn) prevMemoryBtn.style.display = 'none';
+    if (nextMemoryBtn) nextMemoryBtn.style.display = 'none';
 
     // Gift Buttons
     giftButtons.forEach(button => {
@@ -291,6 +291,76 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // --- Share Rakhi Button ---
+    const shareBtn = document.getElementById('shareRakhi');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', function() {
+            const url = shareBtn.getAttribute('data-share-url') || window.location.href;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showMessage('Link copied! Share it with your loved ones 🎉');
+                });
+            } else {
+                // fallback
+                const tempInput = document.createElement('input');
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                tempInput.remove();
+                showMessage('Link copied! Share it with your loved ones 🎉');
+            }
+        });
+    }
+
+    // --- Scroll To Top Button ---
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 200) {
+            scrollBtn.classList.add('show');
+        } else {
+            scrollBtn.classList.remove('show');
+        }
+    });
+    scrollBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // --- Dark Mode Toggle ---
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    function setDarkMode(on) {
+        if (on) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('rakhi-dark-mode', '1');
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('rakhi-dark-mode', '0');
+        }
+    }
+    // On load, check localStorage
+    if (localStorage.getItem('rakhi-dark-mode') === '1') {
+        setDarkMode(true);
+    }
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+            setDarkMode(!document.body.classList.contains('dark-mode'));
+        });
+    }
+
+    // --- Sparkle Effect in Hero Section ---
+    function createSparkle() {
+        const container = document.querySelector('.sparkle-container');
+        if (!container) return;
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = Math.random() * 90 + '%';
+        sparkle.style.top = Math.random() * 90 + '%';
+        sparkle.style.animationDuration = (1.2 + Math.random() * 1.2) + 's';
+        container.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 1800);
+    }
+    setInterval(createSparkle, 600);
 
     // Add scroll event for header
     const header = document.querySelector('header');
@@ -475,6 +545,52 @@ document.addEventListener('DOMContentLoaded', function() {
         header.scrolled {
             padding: 10px 0;
             background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode a {
+            color: #bb86fc;
+        }
+        
+        .dark-mode header {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark-mode .modal-content {
+            background: #1e1e1e;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .close-btn {
+            color: #bbb;
+        }
+        
+        .dark-mode .close-btn:hover {
+            color: #fff;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #fff 0%, rgba(255, 255, 255, 0) 70%);
+            pointer-events: none;
+            animation: sparkle-animation 1.5s infinite;
+        }
+        
+        @keyframes sparkle-animation {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10px) scale(0);
+                opacity: 0;
+            }
         }
     `;
     

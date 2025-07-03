@@ -633,75 +633,75 @@ section {
 
 .memory-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
     margin-bottom: 40px;
+    align-items: stretch;
+    /* Add a little fade-in for the whole grid */
+    animation: fadeInMemories 1.2s cubic-bezier(.4,0,.2,1);
+}
+@keyframes fadeInMemories {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
 }
 
 .memory-item {
-    border-radius: 15px;
+    border-radius: 18px;
     overflow: hidden;
     box-shadow: var(--box-shadow);
-    transition: all 0.3s ease;
+    transition: transform 0.4s cubic-bezier(.4,0,.2,1), box-shadow 0.4s;
     position: relative;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
 }
-
 .memory-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(255, 94, 98, 0.3);
+    transform: translateY(-12px) scale(1.03) rotate(-1deg);
+    box-shadow: 0 24px 48px rgba(255, 94, 98, 0.18);
+    z-index: 2;
 }
 
 .memory-image {
     width: 100%;
-    height: 250px;
+    height: 180px;
     overflow: hidden;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
 .memory-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+    object-fit: contain;
+    transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+    filter: drop-shadow(0 2px 8px rgba(255,94,98,0.07));
+    background: #fff;
 }
-
 .memory-item:hover .memory-image img {
-    transform: scale(1.1);
+    transform: scale(1.08) rotate(2deg);
 }
 
 .memory-caption {
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 15px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    color: var(--light-color);
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.gallery-controls {
+    padding: 14px 12px;
+    background: linear-gradient(to top, rgba(0,0,0,0.65) 70%, transparent 100%);
+    color: #fff;
+    font-size: 1.08rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-align: center;
+    min-height: 44px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 20px;
-}
-
-.gallery-controls button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--background-gradient);
-    color: var(--light-color);
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--box-shadow);
-}
-
-.gallery-controls button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 20px rgba(255, 94, 98, 0.3);
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 /* ===== WISHES SECTION ===== */
@@ -955,6 +955,228 @@ footer::before {
 .copyright p {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== NEW FLOATING BACKGROUND IMAGES ===== */
+.bg-float-img {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.18;
+    pointer-events: none;
+    animation: float-img 18s ease-in-out infinite;
+    transition: opacity 0.5s;
+}
+.bg-float1 {
+    top: 8%;
+    left: 70%;
+    width: 120px;
+    animation-delay: 0s;
+}
+.bg-float2 {
+    bottom: 12%;
+    right: 12%;
+    width: 90px;
+    animation-delay: 3s;
+}
+.bg-float3 {
+    top: 60%;
+    left: 5%;
+    width: 100px;
+    animation-delay: 6s;
+}
+.bg-float4 {
+    bottom: 20%;
+    left: 40%;
+    width: 80px;
+    animation-delay: 9s;
+}
+
+@keyframes float-img {
+    0%, 100% { transform: translateY(0) scale(1) rotate(0deg);}
+    25% { transform: translateY(-20px) scale(1.05) rotate(5deg);}
+    50% { transform: translateY(10px) scale(0.98) rotate(-3deg);}
+    75% { transform: translateY(-10px) scale(1.02) rotate(2deg);}
+}
+
+/* ===== HERO SECTION ANIMATED FLOWER ===== */
+.hero-flower {
+    position: absolute;
+    bottom: -30px;
+    right: -40px;
+    width: 110px;
+    opacity: 0.8;
+    z-index: 2;
+    animation: hero-flower-anim 7s ease-in-out infinite;
+    filter: drop-shadow(0 8px 20px rgba(255,94,98,0.15));
+}
+@keyframes hero-flower-anim {
+    0%, 100% { transform: scale(1) rotate(0deg);}
+    50% { transform: scale(1.08) rotate(12deg);}
+}
+
+/* ===== RAKHI SECTION ANIMATED GIFT ===== */
+.rakhi-gift {
+    position: absolute;
+    top: 60%;
+    left: 70%;
+    width: 70px;
+    opacity: 0.85;
+    z-index: 2;
+    animation: rakhi-gift-anim 6s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(255,153,102,0.18));
+}
+@keyframes rakhi-gift-anim {
+    0%, 100% { transform: translateY(0) scale(1);}
+    50% { transform: translateY(-18px) scale(1.1);}
+}
+
+/* ===== WISHES SECTION NEW FLOATING ITEMS ===== */
+.floating-item.item4 {
+    top: 10%;
+    right: 10%;
+    width: 60px;
+    animation: float-item2 9s ease-in-out infinite 1.5s;
+}
+.floating-item.item5 {
+    bottom: 10%;
+    right: 30%;
+    width: 70px;
+    animation: float-item2 11s ease-in-out infinite 2.5s;
+}
+@keyframes float-item2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg);}
+    25% { transform: translate(10px, -10px) rotate(7deg);}
+    50% { transform: translate(-10px, 15px) rotate(-7deg);}
+    75% { transform: translate(5px, -5px) rotate(3deg);}
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode {
+    background: #181818;
+    color: #f2f2f2;
+}
+body.dark-mode .memories-section,
+body.dark-mode .gift-section {
+    background: #232323;
+}
+body.dark-mode .rakhi-section,
+body.dark-mode .wishes-section {
+    background: linear-gradient(135deg, #232323 90%, #181818 100%);
+}
+body.dark-mode header,
+body.dark-mode .rakhi-card,
+body.dark-mode .wish-card {
+    background: rgba(30,30,30,0.95);
+}
+body.dark-mode .memory-item,
+body.dark-mode .gift-item {
+    background: #232323;
+}
+body.dark-mode .section-title h2,
+body.dark-mode .highlight {
+    color: #fff !important;
+    background: var(--background-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+body.dark-mode .footer-content,
+body.dark-mode footer {
+    background: #181818;
+    color: #f2f2f2;
+}
+body.dark-mode .social-links a {
+    background: rgba(255,255,255,0.08);
+}
+body.dark-mode .social-links a:hover {
+    background: var(--primary-color);
+}
+body.dark-mode .cta-button,
+body.dark-mode .action-button,
+body.dark-mode .gift-button {
+    color: #fff;
+}
+body.dark-mode .modal-content {
+    background: #232323;
+    color: #fff;
+}
+body.dark-mode .message-container {
+    background: var(--background-gradient);
+    color: #fff;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+    outline: none;
+}
+.dark-mode-toggle:hover {
+    color: var(--accent-color);
+}
+header {
+    display: flex;
+    align-items: center;
+}
+
+/* ===== SCROLL TO TOP BUTTON ===== */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--background-gradient);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 16px rgba(255,94,98,0.18);
+    font-size: 1.5rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+#scrollToTopBtn.show {
+    display: flex;
+    animation: fadeInBtn 0.5s;
+}
+@keyframes fadeInBtn {
+    from { opacity: 0; transform: scale(0.8);}
+    to { opacity: 1; transform: scale(1);}
+}
+#scrollToTopBtn:hover {
+    background: var(--secondary-gradient);
+    transform: translateY(-6px) scale(1.08);
+}
+
+/* ===== SPARKLE EFFECT ===== */
+.sparkle-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+.sparkle {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    background: url('https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2728.png') no-repeat center/contain;
+    opacity: 0.7;
+    animation: sparkle-anim 1.8s linear forwards;
+}
+@keyframes sparkle-anim {
+    0% { opacity: 0; transform: scale(0.5) rotate(0deg);}
+    30% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.2) rotate(60deg);}
 }
 
 /* ===== RESPONSIVE STYLES ===== */
