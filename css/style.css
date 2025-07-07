@@ -469,11 +469,26 @@ nav ul li a:hover::after {
     justify-content: center;
     align-items: center;
     position: relative;
+    z-index: 1;
+}
+
+.hero-image::before {
+    content: "";
+    background: url('images/WhatsApp-Video-2025-07-03-at-125/image-34.jpg') center center / cover no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5; /* Adjust this for transparency */
+    z-index: -1;
 }
 
 .hero-image img {
     max-width: 100%;
     animation: float-image 6s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
 }
 
 @keyframes float-image {
